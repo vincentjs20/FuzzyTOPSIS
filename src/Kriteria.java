@@ -16,7 +16,7 @@ public class Kriteria {
     private FuzzyNumber [] fnis;
     
     public Kriteria(){
-        
+
     }
     
     public Kriteria(String [] namaKriteria, FuzzyNumber [] nilaiKriteria, FuzzyNumber [] bobotKriteria){
