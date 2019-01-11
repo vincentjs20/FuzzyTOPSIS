@@ -11,9 +11,11 @@
 public class FuzzyTOPSIS {
     private TokoOnline [] listToko;
     private TokoOnline [] hasil;
+    private Kriteria [] bobot;
     
-    public FuzzyTOPSIS(TokoOnline [] listToko){
+    public FuzzyTOPSIS(TokoOnline [] listToko, Kriteria [] bobot){
         this.listToko = listToko;
+        this.bobot = bobot;
     }
     
     public TokoOnline langkah1(){

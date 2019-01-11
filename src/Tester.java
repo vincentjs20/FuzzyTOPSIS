@@ -107,8 +107,28 @@ public class Tester {
         System.out.println("==================================================");
         for (int i = 0; i < kriteriaInput.length; i++) {
             System.out.print("Bobot untuk kriteria " + bobotKriteria.getNamaKriteria()[i] + " : ");
-            System.out.println(bobotKriteria.getBobotKriteria()[i].getBilA() + ", " + bobotKriteria.getBobotKriteria()[i].getBilB() + ", " + bobotKriteria.getBobotKriteria()[i].getBilC());
+            int bilA = bobotKriteria.getBobotKriteria()[i].getBilA();
+            int bilB = bobotKriteria.getBobotKriteria()[i].getBilB();
+            int bilC = bobotKriteria.getBobotKriteria()[i].getBilC();
+            if(bilA == 1 && bilB == 1 && bilC == 3){
+                System.out.println("Sangat tidak penting");
+            }
+            else if(bilA == 1 &&bilB == 3 && bilC == 5 ){
+                System.out.println("Tidak penting");
+            }
+            else if(bilA == 3 && bilB == 5 && bilC == 7 ){
+                System.out.println("Normal");
+            }
+            else if(bilA == 5 && bilB == 7 && bilC== 9){
+                System.out.println("Penting");
+            }
+            else{
+                System.out.println("Sangat penting");
+            }
+            //System.out.println(bobotKriteria.getBobotKriteria()[i].getBilA() + ", " + bobotKriteria.getBobotKriteria()[i].getBilB() + ", " + bobotKriteria.getBobotKriteria()[i].getBilC());
         }
+        System.out.println("==================================================");
+
         
         //data tiap toko
         Kriteria [] dataKriteria = new Kriteria[4];
@@ -123,8 +143,8 @@ public class Tester {
             FuzzyNumber [] nilai = new FuzzyNumber[10];
             System.out.println("Data "+ listToko[i].getNamaToko() + ": ");
             for (int j = 0; j < kriteriaInput.length; j++) {
-                System.out.println("Nilai untuk kriteria " + dataKriteria[i].getNamaKriteria()[j] + " : ");
-                System.out.println("bobot kriteria : ");
+                System.out.print("Nilai untuk kriteria " + dataKriteria[i].getNamaKriteria()[j] + " : ");
+                //System.out.println("bobot kriteria : ");
                 int nilaiMasuk = sc.nextInt();
                 if (nilaiMasuk == 1) {
                     nilai[j] = new FuzzyNumber(1,1,3);
@@ -145,7 +165,38 @@ public class Tester {
                 dataKriteria[i].setNilaiKriteria(nilai);
                 listToko[i].setDataKriteria(dataKriteria[i]);
             }
-
         }
+        
+        System.out.println("==================================================");
+        for (int i = 0; i < listToko.length; i++) {
+            System.out.println((i+1)+ ". Data " + listToko[i].getNamaToko()+ " :");
+            for (int j = 0; j < kriteriaInput.length; j++) {
+                System.out.print("Nilai untuk kriteria " + dataKriteria[i].getNamaKriteria()[j] + " : ");
+//                int bilA = dataKriteria[i].getNilaiKriteria()[j].getBilA();
+//                int bilB = dataKriteria[i].getNilaiKriteria()[j].getBilB();
+//                int bilC = dataKriteria[i].getNilaiKriteria()[j].getBilC();
+                int bilA = listToko[i].getDataKriteria().getNilaiKriteria()[j].getBilA();
+                int bilB = listToko[i].getDataKriteria().getNilaiKriteria()[j].getBilB();
+                int bilC = listToko[i].getDataKriteria().getNilaiKriteria()[j].getBilC();
+                if(bilA == 1 && bilB == 1 && bilC == 3){
+                    System.out.println("Sangat buruk");
+                }
+                else if(bilA == 1 &&bilB == 3 && bilC == 5 ){
+                    System.out.println("Buruk");
+                }
+                else if(bilA == 3 && bilB == 5 && bilC == 7 ){
+                    System.out.println("Normal");
+                }
+                else if(bilA == 5 && bilB == 7 && bilC== 9){
+                    System.out.println("Baik");
+                }
+                else{
+                    System.out.println("Sangat baik");
+                }
+            }
+            
+            //System.out.println(bobotKriteria.getBobotKriteria()[i].getBilA() + ", " + bobotKriteria.getBobotKriteria()[i].getBilB() + ", " + bobotKriteria.getBobotKriteria()[i].getBilC());
+        }
+        System.out.println("==================================================");
     }
 }
