@@ -9,9 +9,9 @@
  * @author vincent
  */
 public class FuzzyNumber {
-    private int a, b, c;
+    private double a, b, c;
 
-    public FuzzyNumber(int a, int b, int c) {
+    public FuzzyNumber(double a, double b, double c) {
         this.a = a;
         this.b = b;
         this.c = c;
@@ -20,27 +20,27 @@ public class FuzzyNumber {
     public FuzzyNumber() {
     }
 
-    public int getBilA() {
+    public double getBilA() {
         return a;
     }
 
-    public int getBilB() {
+    public double getBilB() {
         return b;
     }
 
-    public int getBilC() {
+    public double getBilC() {
         return c;
     }
 
-    public void setA(int a) {
+    public void setA(double a) {
         this.a = a;
     }
 
-    public void setB(int b) {
+    public void setB(double b) {
         this.b = b;
     }
 
-    public void setC(int c) {
+    public void setC(double c) {
         this.c = c;
     }
 

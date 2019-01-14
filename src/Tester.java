@@ -107,9 +107,9 @@ public class Tester {
         System.out.println("==================================================");
         for (int i = 0; i < kriteriaInput.length; i++) {
             System.out.print("Bobot untuk kriteria " + bobotKriteria.getNamaKriteria()[i] + " : ");
-            int bilA = bobotKriteria.getBobotKriteria()[i].getBilA();
-            int bilB = bobotKriteria.getBobotKriteria()[i].getBilB();
-            int bilC = bobotKriteria.getBobotKriteria()[i].getBilC();
+            double bilA = bobotKriteria.getBobotKriteria()[i].getBilA();
+            double bilB = bobotKriteria.getBobotKriteria()[i].getBilB();
+            double bilC = bobotKriteria.getBobotKriteria()[i].getBilC();
             if(bilA == 1 && bilB == 1 && bilC == 3){
                 System.out.println("Sangat tidak penting");
             }
@@ -175,9 +175,9 @@ public class Tester {
 //                int bilA = dataKriteria[i].getNilaiKriteria()[j].getBilA();
 //                int bilB = dataKriteria[i].getNilaiKriteria()[j].getBilB();
 //                int bilC = dataKriteria[i].getNilaiKriteria()[j].getBilC();
-                int bilA = listToko[i].getDataKriteria().getNilaiKriteria()[j].getBilA();
-                int bilB = listToko[i].getDataKriteria().getNilaiKriteria()[j].getBilB();
-                int bilC = listToko[i].getDataKriteria().getNilaiKriteria()[j].getBilC();
+                double bilA = listToko[i].getDataKriteria().getNilaiKriteria()[j].getBilA();
+                double bilB = listToko[i].getDataKriteria().getNilaiKriteria()[j].getBilB();
+                double bilC = listToko[i].getDataKriteria().getNilaiKriteria()[j].getBilC();
                 if(bilA == 1 && bilB == 1 && bilC == 3){
                     System.out.println("Sangat buruk");
                 }
@@ -198,5 +198,37 @@ public class Tester {
             //System.out.println(bobotKriteria.getBobotKriteria()[i].getBilA() + ", " + bobotKriteria.getBobotKriteria()[i].getBilB() + ", " + bobotKriteria.getBobotKriteria()[i].getBilC());
         }
         System.out.println("==================================================");
+        
+//        System.out.print("Kriteria \\ Alternatif |");
+//        for (int i = 0; i < 4; i++) {
+//            System.out.print(listToko[i].getNamaToko() + "|");
+//        }
+//        System.out.println();
+//        int urutanToko = 0; 
+//        for (int i = 0; i < 10; i++) {
+//            int j = 0;
+//            System.out.print(listToko[1].getDataKriteria().getNamaKriteria()[i] + "|");
+//            while(j < 4){
+//                System.out.print("(" + listToko[j].getDataKriteria().getNilaiKriteria()[i].getBilA() 
+//                        +"," + listToko[j].getDataKriteria().getNilaiKriteria()[i].getBilB() + "," + listToko[j].getDataKriteria().getNilaiKriteria()[i].getBilC() + ") |");
+//                j++;
+//                urutanToko++;
+//            }
+////            for (j = 0; j < 4; j++) {
+////                System.out.print("(" + listToko[j].getDataKriteria().getNilaiKriteria()[i].getBilA() 
+////                        +"," + listToko[j].getDataKriteria().getNilaiKriteria()[i].getBilB() + "," + listToko[j].getDataKriteria().getNilaiKriteria()[i].getBilC() + ") |");
+////            }
+//            System.out.println();
+//            //urutanToko++;
+//        }
+        
+        FuzzyTOPSIS coba = new FuzzyTOPSIS(listToko, bobot);
+        coba.tampilkanData();
+        coba.langkah1();
+        TokoOnline[] hasil2 = coba.langkah2();
+        coba.tampilkanFuzzyNumber(hasil2);
+        TokoOnline[] hasil3 = coba.langkah3();
+        coba.tampilkanFuzzyNumber(hasil3);
+        
     }
 }
