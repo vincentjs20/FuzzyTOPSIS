@@ -13,10 +13,12 @@ public class FuzzyTOPSIS {
     private TokoOnline[] listToko;
     private TokoOnline[] hasilSekarang;
     private FuzzyNumber [] bobot;
+    private Kriteria [] dataKriteria;
 
-    public FuzzyTOPSIS(TokoOnline[] listToko, FuzzyNumber [] bobot) {
+    public FuzzyTOPSIS(TokoOnline[] listToko, FuzzyNumber [] bobot, Kriteria [] dataKriteria) {
         this.listToko = listToko;
         this.bobot = bobot;
+        this.dataKriteria = dataKriteria;
     }
     
     public void tampilkanFuzzyNumber(TokoOnline[] toko){
@@ -117,7 +119,7 @@ public class FuzzyTOPSIS {
     }
     
     public TokoOnline [] langkah2(){
-        System.out.println("-------------------Langkah 2------------------------");
+        //System.out.println("-------------------Langkah 2------------------------");
         double cMax = 9;
         TokoOnline [] hasilLangkah2 = new TokoOnline[4];
         Kriteria [] hasilNormalisasi = new Kriteria[4];
@@ -145,11 +147,10 @@ public class FuzzyTOPSIS {
     }
     
     public TokoOnline [] langkah3(){
-        System.out.println("-------------------Langkah 2------------------------");
+        //System.out.println("-------------------Langkah 2------------------------");
         TokoOnline [] hasilLangkah2 = this.langkah2();
         TokoOnline [] hasilLangkah3 = new TokoOnline[4];
         Kriteria [] hasilNormalisasiBobot = new Kriteria[4];
-        
         for (int i = 0; i < hasilNormalisasiBobot.length; i++) {
             hasilLangkah3[i] = new TokoOnline();
             hasilLangkah3[i].setNamaToko(listToko[i].getNamaToko());
@@ -176,9 +177,19 @@ public class FuzzyTOPSIS {
         return hasilSekarang;
     }
     
-//    public TokoOnline [] langkah4(){
-//        
-//    }
+    public Kriteria [] langkah4(){
+        TokoOnline [] hasilLangkah3 = this.langkah3();
+        double [] tempA = new double [4];
+        double [] tempB = new double [4];
+        double [] tempC = new double [4];
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 10; j++) {
+                tempA[i] = hasilLangkah3[i].getDataKriteria().getNilaiKriteria()[j].getBilA();
+                tempB[i] = hasilLangkah3[i].getDataKriteria().getNilaiKriteria()[j].getBilB();
+                tempC[i] = hasilLangkah3[i].getDataKriteria().getNilaiKriteria()[j].getBilC();
+            }
+        }
+    }
     
     
 }

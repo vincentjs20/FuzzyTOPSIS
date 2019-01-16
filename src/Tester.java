@@ -222,12 +222,14 @@ public class Tester {
 //            //urutanToko++;
 //        }
         
-        FuzzyTOPSIS coba = new FuzzyTOPSIS(listToko, bobot);
+        FuzzyTOPSIS coba = new FuzzyTOPSIS(listToko, bobot, dataKriteria);
         coba.tampilkanData();
         coba.langkah1();
         TokoOnline[] hasil2 = coba.langkah2();
+        System.out.println("-------------------Langkah 2------------------------");
         coba.tampilkanFuzzyNumber(hasil2);
         TokoOnline[] hasil3 = coba.langkah3();
+        System.out.println("-------------------Langkah 3------------------------");
         coba.tampilkanFuzzyNumber(hasil3);
         
     }
