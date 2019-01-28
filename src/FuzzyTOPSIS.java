@@ -1,3 +1,6 @@
+
+import java.util.Arrays;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -47,6 +50,72 @@ public class FuzzyTOPSIS {
         System.out.println("==================================================");
     }
     
+    public void tampilkanFnisFpis(Kriteria hasil){
+        System.out.println("Kriteria | FPIS | FNIS");
+        for (int i = 0; i < 10; i++) {
+            //int j = 0;
+            System.out.print(dataKriteria[0].getNamaKriteria()[i]+" | ");
+            System.out.printf("(%.3f, %.3f, %.3f) | (%.3f, %.3f, %.3f)", hasil.getFpis()[i].getBilA()
+                   ,hasil.getFpis()[i].getBilB(), hasil.getFpis()[i].getBilC(), hasil.getFnis()[i].getBilA()
+                   ,hasil.getFnis()[i].getBilB(), hasil.getFnis()[i].getBilC());
+            System.out.println();
+        }
+        System.out.println("==================================================");
+    }
+    
+    public void tampilkanJarakFnisFpis(TokoOnline [] toko){
+        System.out.println("Jarak ke fpis");
+        System.out.print("Kriteria \\ Alternatif |");
+        for (int i = 0; i < 4; i++) {
+            System.out.print(toko[i].getNamaToko() + "|");
+        }
+        System.out.println();
+        for (int i = 0; i < 10; i++) {
+            int j = 0;
+            System.out.print(toko[1].getDataKriteria().getNamaKriteria()[i] + "|");
+            while (j < 4) {
+                System.out.printf("%.3f |", toko[j].getDataKriteria().getJarakFpis()[i]);
+                j++;
+            }
+//            for (j = 0; j < 4; j++) {
+//                System.out.print("(" + listToko[j].getDataKriteria().getNilaiKriteria()[i].getBilA() 
+//                        +"," + listToko[j].getDataKriteria().getNilaiKriteria()[i].getBilB() + "," + listToko[j].getDataKriteria().getNilaiKriteria()[i].getBilC() + ") |");
+//            }
+            System.out.println();
+        }
+        System.out.print("Total jarak |");
+        for (int i = 0; i < 4; i++) {
+            System.out.printf(" %.3f | ", toko[i].getTotalJarakFpis());
+        }
+        System.out.println();
+        System.out.println("==================================================");
+        System.out.println("Jarak ke fnis");
+        System.out.print("Kriteria \\ Alternatif |");
+        for (int i = 0; i < 4; i++) {
+            System.out.print(toko[i].getNamaToko() + "|");
+        }
+        System.out.println();
+        for (int i = 0; i < 10; i++) {
+            int j = 0;
+            System.out.print(toko[1].getDataKriteria().getNamaKriteria()[i] + "|");
+            while (j < 4) {
+                System.out.printf("%.3f |", toko[j].getDataKriteria().getJarakFnis()[i]);
+                j++;
+            }
+//            for (j = 0; j < 4; j++) {
+//                System.out.print("(" + listToko[j].getDataKriteria().getNilaiKriteria()[i].getBilA() 
+//                        +"," + listToko[j].getDataKriteria().getNilaiKriteria()[i].getBilB() + "," + listToko[j].getDataKriteria().getNilaiKriteria()[i].getBilC() + ") |");
+//            }
+            System.out.println();
+        }
+        System.out.print("Total jarak |");
+        for (int i = 0; i < 4; i++) {
+            System.out.printf(" %.3f |", toko[i].getTotalJarakFnis());
+        }
+        System.out.println();
+        System.out.println("==================================================");
+    }
+    
     public void tampilkanData(){
         System.out.print("Kriteria \\ Alternatif |");
         for (int i = 0; i < 4; i++) {
@@ -85,7 +154,7 @@ public class FuzzyTOPSIS {
 //                System.out.print("(" + listToko[j].getDataKriteria().getNilaiKriteria()[i].getBilA() 
 //                        +"," + listToko[j].getDataKriteria().getNilaiKriteria()[i].getBilB() + "," + listToko[j].getDataKriteria().getNilaiKriteria()[i].getBilC() + ") |");
 //            }
-            System.out.println("");
+            System.out.println();
         }
         System.out.println("==================================================");
 
@@ -177,19 +246,120 @@ public class FuzzyTOPSIS {
         return hasilSekarang;
     }
     
-    public Kriteria [] langkah4(){
+    public Kriteria langkah4(){
         TokoOnline [] hasilLangkah3 = this.langkah3();
-        double [] tempA = new double [4];
-        double [] tempB = new double [4];
-        double [] tempC = new double [4];
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 10; j++) {
-                tempA[i] = hasilLangkah3[i].getDataKriteria().getNilaiKriteria()[j].getBilA();
-                tempB[i] = hasilLangkah3[i].getDataKriteria().getNilaiKriteria()[j].getBilB();
-                tempC[i] = hasilLangkah3[i].getDataKriteria().getNilaiKriteria()[j].getBilC();
+        double [] bilATemp = new double[4];
+        double [] bilBTemp = new double[4];
+        double [] bilCTemp = new double[4];
+        FuzzyNumber [] fpis = new FuzzyNumber[10];
+        FuzzyNumber [] fnis = new FuzzyNumber[10];
+        Kriteria hasil = new Kriteria();
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 4; j++) {
+                bilATemp[j] = hasilLangkah3[j].getDataKriteria().getNilaiKriteria()[i].getBilA();
+                bilBTemp[j] = hasilLangkah3[j].getDataKriteria().getNilaiKriteria()[i].getBilB();
+                bilCTemp[j] = hasilLangkah3[j].getDataKriteria().getNilaiKriteria()[i].getBilC();
             }
+            Arrays.sort(bilATemp);
+            Arrays.sort(bilBTemp);
+            Arrays.sort(bilCTemp);
+            double minA = bilATemp[0];
+            double maxA = bilATemp[bilATemp.length-1];
+            double minB = bilBTemp[0];
+            double maxB = bilBTemp[bilBTemp.length-1];
+            double minC = bilCTemp[0];
+            double maxC = bilCTemp[bilCTemp.length-1];
+            fpis[i] = new FuzzyNumber(maxA, maxB, maxC);
+            fnis[i] = new FuzzyNumber(minA, minB, minC);
         }
+        hasil.setFnis(fnis);
+        hasil.setFpis(fpis);
+        return hasil;
     }
     
+    public TokoOnline [] langkah5(){
+        TokoOnline [] hasilLangkah3 = this.langkah3();
+        Kriteria hasilLangkah4 = this.langkah4();
+        TokoOnline [] hasilLangkah5 = new TokoOnline[4];
+        Kriteria [] jarakFpisFnis = new Kriteria[4];
+        for (int i = 0; i < jarakFpisFnis.length; i++) {
+            hasilLangkah5[i] = new TokoOnline();
+            hasilLangkah5[i].setNamaToko(listToko[i].getNamaToko());
+            jarakFpisFnis[i] = new Kriteria();
+            jarakFpisFnis[i].setNamaKriteria(listToko[i].getDataKriteria().getNamaKriteria());
+            jarakFpisFnis[i].setBobotKriteria(bobot);
+        }
+        
+        for (int i = 0; i < 4; i++) {
+            double [] jarakFpis = new double [10];
+            double [] jarakFnis = new double [10];
+            for (int j = 0; j < 10; j++) {
+                double an = hasilLangkah4.getFnis()[j].getBilA();
+                double bn = hasilLangkah4.getFnis()[j].getBilB();
+                double cn = hasilLangkah4.getFnis()[j].getBilC();
+                double ap = hasilLangkah4.getFpis()[j].getBilA();
+                double bp = hasilLangkah4.getFpis()[j].getBilB();
+                double cp = hasilLangkah4.getFpis()[j].getBilC();
+                double bilA = hasilLangkah3[i].getDataKriteria().getNilaiKriteria()[j].getBilA()  ;
+                double bilB = hasilLangkah3[i].getDataKriteria().getNilaiKriteria()[j].getBilB() ;
+                double bilC = hasilLangkah3[i].getDataKriteria().getNilaiKriteria()[j].getBilC() ;
+                double hasilFpis = Math.sqrt((Math.pow((bilA-ap), 2)+ (Math.pow((bilB-bp), 2))+(Math.pow((bilC-cp), 2)))/3.0);;
+                double hasilFnis = Math.sqrt((Math.pow((bilA-an), 2)+ (Math.pow((bilB-bn), 2))+(Math.pow((bilC-cn), 2)))/3.0);;
+                //normalisasiBobot[j] = new FuzzyNumber(bilA, bilB, bilC); 
+                jarakFpis[j] = hasilFpis;
+                jarakFnis[j] = hasilFnis;
+                jarakFpisFnis[i].setJarakFnis(jarakFnis);
+                jarakFpisFnis[i].setJarakFpis(jarakFpis);
+                hasilLangkah5[i].setDataKriteria(jarakFpisFnis[i]);
+            }
+            double totalJarakFpis = 0;
+            double totalJarakFnis = 0;
+
+            for (int j = 0; j < 10; j++) {
+                totalJarakFpis += hasilLangkah5[i].getDataKriteria().getJarakFpis()[j];
+                totalJarakFnis += hasilLangkah5[i].getDataKriteria().getJarakFnis()[j];
+                hasilLangkah5[i].setTotalJarakFpis(totalJarakFpis);
+                hasilLangkah5[i].setTotalJarakFnis(totalJarakFnis);
+            }
+        }
+        this.hasilSekarang = hasilLangkah5;
+        return hasilSekarang;
+    }    
     
+    public TokoOnline [] langkah6(){
+        TokoOnline [] hasilLangkah5 = this.langkah5();
+        double [] hasilKedekatanRelatif = new double [4];
+        for (int i = 0; i < 4; i++) {
+            hasilKedekatanRelatif[i] = hasilLangkah5[i].getTotalJarakFnis() / 
+                    (hasilLangkah5[i].getTotalJarakFnis() + hasilLangkah5[i].getTotalJarakFpis());
+            hasilSekarang[i].setKedekatanRelatif(hasilKedekatanRelatif[i]);
+        }
+        return hasilSekarang;
+    }
+    
+    public TokoOnline [] langkah7(){
+        TokoOnline [] hasil = hasilSekarang;
+        double [] nilai = new double [4];
+        for (int i = 0; i < 4; i++) {
+            nilai[i] = hasil[i].getKedekatanRelatif();
+        }
+        Arrays.sort(nilai);
+        int j = 1;
+        for (int i = 3; i >= 0; i--) {
+            int indexKe = Arrays.binarySearch(nilai, nilai[i]);
+            hasil[indexKe].setRanking(j);
+            j++;
+        }
+        return hasil;
+    }
+    
+    public void tampilkanHasilAkhir(TokoOnline [] hasil){
+        System.out.println("Alternatif | dj+ | dj- | CCi | rank");
+        for (int i = 0; i < 4; i++) {
+            System.out.print(hasil[i].getNamaToko()+ " | ");
+            System.out.printf("%.3f | %.3f | %.3f | ", hasil[i].getTotalJarakFpis(), 
+                    hasil[i].getTotalJarakFnis(), hasil[i].getKedekatanRelatif());
+            System.out.println(hasil[i].getRanking());
+        }
+    }
 }

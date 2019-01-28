@@ -231,6 +231,15 @@ public class Tester {
         TokoOnline[] hasil3 = coba.langkah3();
         System.out.println("-------------------Langkah 3------------------------");
         coba.tampilkanFuzzyNumber(hasil3);
-        
+        Kriteria langkah4 = coba.langkah4();
+        System.out.println("-------------------Langkah 4------------------------");
+        coba.tampilkanFnisFpis(langkah4);
+        TokoOnline[] hasil5 = coba.langkah5();
+        System.out.println("-------------------Langkah 5------------------------");
+        coba.tampilkanJarakFnisFpis(hasil5);
+        TokoOnline [] hasil6 = coba.langkah6();
+        TokoOnline [] hasil7 = coba.langkah7();
+        System.out.println("-------------------Langkah 6 & 7------------------------");
+        coba.tampilkanHasilAkhir(hasil7);
     }
 }

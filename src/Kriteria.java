@@ -14,6 +14,8 @@ public class Kriteria {
     private FuzzyNumber [] bobotKriteria;
     private FuzzyNumber [] fpis;
     private FuzzyNumber [] fnis;
+    private double [] jarakFpis;
+    private double [] jarakFnis;
     
     public Kriteria(){
 
@@ -94,6 +96,21 @@ public class Kriteria {
     public void setFnis(FuzzyNumber[] fnis) {
         this.fnis = fnis;
     }
-    
-    
+
+    public double[] getJarakFnis() {
+        return jarakFnis;
+    }
+
+    public void setJarakFnis(double[] jarakFnis) {
+        this.jarakFnis = jarakFnis;
+    }
+
+    public double[] getJarakFpis() {
+        return jarakFpis;
+    }
+
+    public void setJarakFpis(double[] jarakFpis) {
+        this.jarakFpis = jarakFpis;
+    }
+       
 }
