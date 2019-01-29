@@ -87,13 +87,9 @@ public class TokoOnline implements Comparable<TokoOnline> {
 
     @Override
     public int compareTo(TokoOnline compareTokoOnline) {
-        int compareRanking = ((TokoOnline) compareTokoOnline).getRanking(); 
+        //int compareRanking = ((TokoOnline) compareTokoOnline).getRanking(); 
 		
-        //ascending order
-        return this.ranking - compareRanking;
-	
-        //descending order
-        //return compareQuantity - this.quantity;
+        return Double.compare(compareTokoOnline.kedekatanRelatif, kedekatanRelatif);
     }
  
 }
