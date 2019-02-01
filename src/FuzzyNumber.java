@@ -43,5 +43,4 @@ public class FuzzyNumber {
     public void setC(double c) {
         this.c = c;
     }
-
 }

@@ -16,15 +16,19 @@ public class Kriteria {
     private FuzzyNumber [] fnis;
     private double [] jarakFpis;
     private double [] jarakFnis;
+    private String [] linguistikNilai;
+    private String [] linguistikBobot;
     
     public Kriteria(){
 
     }
     
-    public Kriteria(String [] namaKriteria, FuzzyNumber [] nilaiKriteria, FuzzyNumber [] bobotKriteria){
+    public Kriteria(String [] namaKriteria, String [] linguistikNilai, String [] linguistikBobot){
         this.namaKriteria = namaKriteria;
-        this.nilaiKriteria = nilaiKriteria;
-        this.bobotKriteria = bobotKriteria;
+        this.linguistikNilai = linguistikNilai;
+        this.linguistikBobot = linguistikBobot;
+        this.bobotKriteria = this.linguistikBobotToFuzzy(linguistikBobot);
+        
     }
 
     /**
@@ -39,6 +43,22 @@ public class Kriteria {
      */
     public void setNamaKriteria(String[] namaKriteria) {
         this.namaKriteria = namaKriteria;
+    }
+
+    public String[] getLinguistikBobot() {
+        return linguistikBobot;
+    }
+
+    public void setLinguistikBobot(String[] linguistikBobot) {
+        this.linguistikBobot = linguistikBobot;
+    }
+
+    public String[] getLinguistikNilai() {
+        return linguistikNilai;
+    }
+
+    public void setLinguistikNilai(String[] linguistikNilai) {
+        this.linguistikNilai = linguistikNilai;
     }
 
     /**
@@ -112,5 +132,49 @@ public class Kriteria {
     public void setJarakFpis(double[] jarakFpis) {
         this.jarakFpis = jarakFpis;
     }
-       
+    
+    public FuzzyNumber [] linguistikNilaiToFuzzy(String [] linguistikNilai){
+        FuzzyNumber [] nilaiKriteria = new FuzzyNumber[linguistikNilai.length];
+        for (int i = 0; i < linguistikNilai.length; i++) {
+            if(linguistikNilai[i].equalsIgnoreCase("sangat buruk")){
+                nilaiKriteria[i] = new FuzzyNumber(1,1,3);
+            }
+            else if(linguistikNilai[i].equalsIgnoreCase("buruk")){
+                nilaiKriteria[i] = new FuzzyNumber(1,3,5);
+            }
+            else if(linguistikNilai[i].equalsIgnoreCase("normal")){
+                nilaiKriteria[i] = new FuzzyNumber(3,5,7);
+            }
+            else if(linguistikNilai[i].equalsIgnoreCase("baik")){
+                nilaiKriteria[i] = new FuzzyNumber(5,7,9);
+            }
+            else if(linguistikNilai[i].equalsIgnoreCase("sangat baik")){
+                nilaiKriteria[i] = new FuzzyNumber(7,9,9);
+            }
+        }
+        return bobotKriteria;
+    }
+    
+    public FuzzyNumber [] linguistikBobotToFuzzy(String [] linguistikBobot){
+
+        FuzzyNumber [] bobotKriteria = new FuzzyNumber[linguistikBobot.length];
+        for (int i = 0; i < linguistikBobot.length; i++) {
+            if(linguistikBobot[i].equalsIgnoreCase("sangat tidak penting")){
+                bobotKriteria[i] = new FuzzyNumber(1,1,3);
+            }
+            else if(linguistikBobot[i].equalsIgnoreCase("tidak penting")){
+                bobotKriteria[i] = new FuzzyNumber(1,3,5);
+            }
+            else if(linguistikBobot[i].equalsIgnoreCase("normal")){
+                bobotKriteria[i] = new FuzzyNumber(3,5,7);
+            }
+            else if(linguistikBobot[i].equalsIgnoreCase("penting")){
+                bobotKriteria[i] = new FuzzyNumber(5,7,9);
+            }
+            else if(linguistikBobot[i].equalsIgnoreCase("sangat penting")){
+                bobotKriteria[i] = new FuzzyNumber(7,9,9);
+            }
+        }
+        return bobotKriteria;
+    }
 }
