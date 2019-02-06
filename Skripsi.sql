@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.8.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Jan 31, 2019 at 09:22 AM
--- Server version: 10.1.35-MariaDB
--- PHP Version: 7.2.9
+-- Host: 127.0.0.1
+-- Generation Time: Feb 06, 2019 at 09:40 AM
+-- Server version: 10.1.33-MariaDB
+-- PHP Version: 7.2.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,8 +19,36 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `Skripsi`
+-- Database: `skripsi`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bobotkriteria`
+--
+
+CREATE TABLE `bobotkriteria` (
+  `id_bobot` int(11) NOT NULL,
+  `id_kriteria` int(11) NOT NULL,
+  `bobot` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `bobotkriteria`
+--
+
+INSERT INTO `bobotkriteria` (`id_bobot`, `id_kriteria`, `bobot`) VALUES
+(1, 1, 'normal'),
+(2, 2, 'kurang penting'),
+(3, 3, 'penting'),
+(4, 4, 'normal'),
+(5, 5, 'sangat penting'),
+(6, 6, 'normal'),
+(7, 7, 'kurang penting'),
+(8, 8, 'penting'),
+(9, 9, 'sangat tidak penting'),
+(10, 10, 'normal');
 
 -- --------------------------------------------------------
 
@@ -52,10 +80,10 @@ INSERT INTO `kriteria` (`id_kriteria`, `nama_kriteria`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `NilaiKriteria`
+-- Table structure for table `nilaikriteria`
 --
 
-CREATE TABLE `NilaiKriteria` (
+CREATE TABLE `nilaikriteria` (
   `id_nilai_kriteria` int(11) NOT NULL,
   `id_kriteria` int(11) NOT NULL,
   `id_toko` int(11) NOT NULL,
@@ -64,10 +92,10 @@ CREATE TABLE `NilaiKriteria` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `NilaiKriteria`
+-- Dumping data for table `nilaikriteria`
 --
 
-INSERT INTO `NilaiKriteria` (`id_nilai_kriteria`, `id_kriteria`, `id_toko`, `nilai`, `id_pengguna`) VALUES
+INSERT INTO `nilaikriteria` (`id_nilai_kriteria`, `id_kriteria`, `id_toko`, `nilai`, `id_pengguna`) VALUES
 (1, 1, 1, 'baik', 1),
 (2, 2, 1, 'baik', 1),
 (3, 3, 1, 'sangat baik', 1),
@@ -77,7 +105,37 @@ INSERT INTO `NilaiKriteria` (`id_nilai_kriteria`, `id_kriteria`, `id_toko`, `nil
 (7, 7, 1, 'sangat buruk', 1),
 (8, 8, 1, 'baik', 1),
 (9, 9, 1, 'normal', 1),
-(10, 10, 1, 'sangat baik', 1);
+(10, 10, 1, 'sangat baik', 1),
+(11, 1, 2, 'normal', 1),
+(12, 2, 2, 'baik', 1),
+(13, 3, 2, 'normal', 1),
+(14, 4, 2, 'normal', 1),
+(15, 5, 2, 'sangat baik', 1),
+(16, 6, 2, 'buruk', 1),
+(17, 7, 2, 'normal', 1),
+(18, 8, 2, 'normal', 1),
+(19, 9, 2, 'baik', 1),
+(20, 10, 2, 'baik', 1),
+(21, 1, 3, 'normal', 1),
+(22, 2, 3, 'buruk', 1),
+(23, 3, 3, 'buruk', 1),
+(24, 4, 3, 'sangat baik', 1),
+(25, 5, 3, 'sangat baik', 1),
+(26, 6, 3, 'baik', 1),
+(27, 7, 3, 'buruk', 1),
+(28, 8, 3, 'buruk', 1),
+(29, 9, 3, 'buruk', 1),
+(30, 10, 3, 'normal', 1),
+(31, 1, 4, 'buruk', 1),
+(32, 2, 4, 'normal', 1),
+(33, 3, 4, 'sangat baik', 1),
+(34, 4, 4, 'sangat buruk', 1),
+(35, 5, 4, 'sangat baik', 1),
+(36, 6, 4, 'normal', 1),
+(37, 7, 4, 'baik', 1),
+(38, 8, 4, 'baik', 1),
+(39, 9, 4, 'sangat baik', 1),
+(40, 10, 4, 'buruk', 1);
 
 -- --------------------------------------------------------
 
@@ -124,15 +182,22 @@ INSERT INTO `toko_online` (`id_toko`, `nama_toko`, `rank`) VALUES
 --
 
 --
+-- Indexes for table `bobotkriteria`
+--
+ALTER TABLE `bobotkriteria`
+  ADD PRIMARY KEY (`id_bobot`),
+  ADD KEY `id_kriteria` (`id_kriteria`);
+
+--
 -- Indexes for table `kriteria`
 --
 ALTER TABLE `kriteria`
   ADD PRIMARY KEY (`id_kriteria`);
 
 --
--- Indexes for table `NilaiKriteria`
+-- Indexes for table `nilaikriteria`
 --
-ALTER TABLE `NilaiKriteria`
+ALTER TABLE `nilaikriteria`
   ADD PRIMARY KEY (`id_nilai_kriteria`),
   ADD KEY `id_kriteria` (`id_kriteria`),
   ADD KEY `id_toko` (`id_toko`),
@@ -155,16 +220,22 @@ ALTER TABLE `toko_online`
 --
 
 --
+-- AUTO_INCREMENT for table `bobotkriteria`
+--
+ALTER TABLE `bobotkriteria`
+  MODIFY `id_bobot` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
 -- AUTO_INCREMENT for table `kriteria`
 --
 ALTER TABLE `kriteria`
   MODIFY `id_kriteria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT for table `NilaiKriteria`
+-- AUTO_INCREMENT for table `nilaikriteria`
 --
-ALTER TABLE `NilaiKriteria`
-  MODIFY `id_nilai_kriteria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+ALTER TABLE `nilaikriteria`
+  MODIFY `id_nilai_kriteria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `pengguna`
@@ -183,9 +254,15 @@ ALTER TABLE `toko_online`
 --
 
 --
--- Constraints for table `NilaiKriteria`
+-- Constraints for table `bobotkriteria`
 --
-ALTER TABLE `NilaiKriteria`
+ALTER TABLE `bobotkriteria`
+  ADD CONSTRAINT `bobotkriteria_ibfk_1` FOREIGN KEY (`id_kriteria`) REFERENCES `kriteria` (`id_kriteria`);
+
+--
+-- Constraints for table `nilaikriteria`
+--
+ALTER TABLE `nilaikriteria`
   ADD CONSTRAINT `NilaiKriteria_ibfk_1` FOREIGN KEY (`id_kriteria`) REFERENCES `kriteria` (`id_kriteria`),
   ADD CONSTRAINT `NilaiKriteria_ibfk_2` FOREIGN KEY (`id_toko`) REFERENCES `toko_online` (`id_toko`),
   ADD CONSTRAINT `NilaiKriteria_ibfk_3` FOREIGN KEY (`id_pengguna`) REFERENCES `pengguna` (`id_pengguna`);
