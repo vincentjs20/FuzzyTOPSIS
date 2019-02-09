@@ -131,19 +131,18 @@ public class Tester {
 
         
         //data tiap toko
-        Kriteria [] dataKriteria = new Kriteria[4];
-        for (int i = 0; i < dataKriteria.length; i++) {
-            dataKriteria[i] = new Kriteria();
-            dataKriteria[i].setNamaKriteria(kriteriaInput);
-            dataKriteria[i].setBobotKriteria(bobot);
-        }
+        
+        
         System.out.println("Keterangan nilai kriteria (masukan angka dengan ketentuan sebagai berikut: "
                 + "\n" + "1. Sangat buruk" + "\n" + "2. Buruk" + "\n" + "3. Normal" + "\n" + "4. Baik" + "\n" + "5. Sangat baik");
         for (int i = 0; i < listToko.length; i++) {
             FuzzyNumber [] nilai = new FuzzyNumber[10];
             System.out.println("Data "+ listToko[i].getNamaToko() + ": ");
+            Kriteria dataKriteria = new Kriteria();
+            dataKriteria.setNamaKriteria(kriteriaInput);
+            dataKriteria.setBobotKriteria(bobot);
             for (int j = 0; j < kriteriaInput.length; j++) {
-                System.out.print("Nilai untuk kriteria " + dataKriteria[i].getNamaKriteria()[j] + " : ");
+                System.out.print("Nilai untuk kriteria " + dataKriteria.getNamaKriteria()[j] + " : ");
                 //System.out.println("bobot kriteria : ");
                 int nilaiMasuk = sc.nextInt();
                 if (nilaiMasuk == 1) {
@@ -162,16 +161,18 @@ public class Tester {
                     nilai[j] = new FuzzyNumber(7,9,9);
                 }
                 //FuzzyNumber bobot = new FuzzyNumber(bilA, bilB, bilC);
-                dataKriteria[i].setNilaiKriteria(nilai);
-                listToko[i].setDataKriteria(dataKriteria[i]);
+                dataKriteria.setNilaiKriteria(nilai);
+                listToko[i].setDataKriteria(dataKriteria);
             }
         }
-        
+        Kriteria dataKriteria = new Kriteria();
+        dataKriteria.setNamaKriteria(kriteriaInput);
+        dataKriteria.setBobotKriteria(bobot);
         System.out.println("==================================================");
         for (int i = 0; i < listToko.length; i++) {
             System.out.println((i+1)+ ". Data " + listToko[i].getNamaToko()+ " :");
             for (int j = 0; j < kriteriaInput.length; j++) {
-                System.out.print("Nilai untuk kriteria " + dataKriteria[i].getNamaKriteria()[j] + " : ");
+                System.out.print("Nilai untuk kriteria " + dataKriteria.getNamaKriteria()[j] + " : ");
 //                int bilA = dataKriteria[i].getNilaiKriteria()[j].getBilA();
 //                int bilB = dataKriteria[i].getNilaiKriteria()[j].getBilB();
 //                int bilC = dataKriteria[i].getNilaiKriteria()[j].getBilC();
@@ -222,7 +223,7 @@ public class Tester {
 //            //urutanToko++;
 //        }
         
-        FuzzyTOPSIS coba = new FuzzyTOPSIS(listToko, bobot, dataKriteria);
+        FuzzyTOPSIS coba = new FuzzyTOPSIS(listToko, dataKriteria);
         coba.tampilkanData();
         coba.langkah1();
         TokoOnline[] hasil2 = coba.langkah2();

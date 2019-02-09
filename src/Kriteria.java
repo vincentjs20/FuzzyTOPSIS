@@ -25,10 +25,10 @@ public class Kriteria {
     
     public Kriteria(String [] namaKriteria, String [] linguistikNilai, String [] linguistikBobot){
         this.namaKriteria = namaKriteria;
-        this.linguistikNilai = linguistikNilai;
-        this.linguistikBobot = linguistikBobot;
+//        this.linguistikNilai = linguistikNilai;
+//        this.linguistikBobot = linguistikBobot;
         this.bobotKriteria = this.linguistikBobotToFuzzy(linguistikBobot);
-        
+        this.nilaiKriteria = this.linguistikNilaiToFuzzy(linguistikNilai);
     }
 
     /**
@@ -152,7 +152,7 @@ public class Kriteria {
                 nilaiKriteria[i] = new FuzzyNumber(7,9,9);
             }
         }
-        return bobotKriteria;
+        return nilaiKriteria;
     }
     
     public FuzzyNumber [] linguistikBobotToFuzzy(String [] linguistikBobot){
@@ -162,7 +162,7 @@ public class Kriteria {
             if(linguistikBobot[i].equalsIgnoreCase("sangat tidak penting")){
                 bobotKriteria[i] = new FuzzyNumber(1,1,3);
             }
-            else if(linguistikBobot[i].equalsIgnoreCase("tidak penting")){
+            else if(linguistikBobot[i].equalsIgnoreCase("kurang penting")){
                 bobotKriteria[i] = new FuzzyNumber(1,3,5);
             }
             else if(linguistikBobot[i].equalsIgnoreCase("normal")){

@@ -15,12 +15,12 @@ public class FuzzyTOPSIS {
 
     private TokoOnline[] listToko;
     private TokoOnline[] hasilSekarang;
-    private FuzzyNumber [] bobot;
-    private Kriteria [] dataKriteria;
+    //private FuzzyNumber [] bobot;
+    private Kriteria  dataKriteria;
 
-    public FuzzyTOPSIS(TokoOnline[] listToko, FuzzyNumber [] bobot, Kriteria [] dataKriteria) {
+    public FuzzyTOPSIS(TokoOnline[] listToko, Kriteria dataKriteria) {
         this.listToko = listToko;
-        this.bobot = bobot;
+        //this.bobot = bobot;
         this.dataKriteria = dataKriteria;
     }
     
@@ -54,7 +54,7 @@ public class FuzzyTOPSIS {
         System.out.println("Kriteria | FPIS | FNIS");
         for (int i = 0; i < 10; i++) {
             //int j = 0;
-            System.out.print(dataKriteria[0].getNamaKriteria()[i]+" | ");
+            System.out.print(dataKriteria.getNamaKriteria()[i]+" | ");
             System.out.printf("(%.3f, %.3f, %.3f) | (%.3f, %.3f, %.3f)", hasil.getFpis()[i].getBilA()
                    ,hasil.getFpis()[i].getBilB(), hasil.getFpis()[i].getBilC(), hasil.getFnis()[i].getBilA()
                    ,hasil.getFnis()[i].getBilB(), hasil.getFnis()[i].getBilC());
@@ -197,7 +197,7 @@ public class FuzzyTOPSIS {
             hasilLangkah2[i].setNamaToko(listToko[i].getNamaToko());
             hasilNormalisasi[i] = new Kriteria();
             hasilNormalisasi[i].setNamaKriteria(listToko[i].getDataKriteria().getNamaKriteria());
-            hasilNormalisasi[i].setBobotKriteria(bobot);
+            //hasilNormalisasi[i].setBobotKriteria(bobot);
         }
         
         for (int i = 0; i < this.listToko.length; i++) {
@@ -225,7 +225,7 @@ public class FuzzyTOPSIS {
             hasilLangkah3[i].setNamaToko(listToko[i].getNamaToko());
             hasilNormalisasiBobot[i] = new Kriteria();
             hasilNormalisasiBobot[i].setNamaKriteria(listToko[i].getDataKriteria().getNamaKriteria());
-            hasilNormalisasiBobot[i].setBobotKriteria(bobot);
+            hasilNormalisasiBobot[i].setBobotKriteria(dataKriteria.getBobotKriteria());
         }
         
         for (int i = 0; i < this.listToko.length; i++) {
@@ -287,7 +287,7 @@ public class FuzzyTOPSIS {
             hasilLangkah5[i].setNamaToko(listToko[i].getNamaToko());
             jarakFpisFnis[i] = new Kriteria();
             jarakFpisFnis[i].setNamaKriteria(listToko[i].getDataKriteria().getNamaKriteria());
-            jarakFpisFnis[i].setBobotKriteria(bobot);
+            jarakFpisFnis[i].setBobotKriteria(listToko[i].getDataKriteria().getBobotKriteria());
         }
         
         for (int i = 0; i < this.listToko.length; i++) {
